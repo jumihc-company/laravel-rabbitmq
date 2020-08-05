@@ -1,0 +1,36 @@
+{
+    "name": "jmhc/laravel-rabbitmq",
+    "description": "Laravel rabbitmq.",
+    "keywords": [
+        "jmhc",
+        "laravel",
+        "rabbitmq"
+    ],
+    "homepage": "http://jumihc.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jumihc",
+            "email": "jumihuchuang@126.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jmhc\\Rabbitmq\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "laravel/framework": "^7.0",
+        "jmhc/laravel-support": "^2.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^10.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jmhc\\Rabbitmq\\JmhcServiceProvider"
+            ]
+        }
+    }
+}
