@@ -1,10 +1,17 @@
-## 使用说明
+## 介绍
 
 > 环境变量值参考：[env](docs/ENV.md)
 >
 > 详细使用说明查看：[README.md](https://github.com/vyuldashev/laravel-queue-rabbitmq/blob/master/README.md)
 
-### 快速使用
+## 安装
+
+使用以下命令安装：
+```
+$ composer require jmhc/laravel-rabbitmq
+```
+
+## 快速使用
 
 - 配置环境变量
 - 启用监听

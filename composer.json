@@ -20,11 +20,11 @@
         }
     },
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "ext-json": "*",
-        "laravel/framework": "^7.0",
-        "jmhc/laravel-support": "^2.0",
-        "vladimir-yuldashev/laravel-queue-rabbitmq": "^10.0"
+        "jmhc/laravel-support": "^8.0",
+        "jmhc/laravel-log": "^8.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.0"
     },
     "extra": {
         "laravel": {

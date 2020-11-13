@@ -6,8 +6,8 @@
 
 namespace Jmhc\Rabbitmq\Jobs;
 
+use Jmhc\Log\Log;
 use Jmhc\Support\Utils\Collection;
-use Jmhc\Support\Utils\LogHelper;
 
 abstract class BaseRabbitmq extends BaseJob
 {
@@ -25,9 +25,10 @@ abstract class BaseRabbitmq extends BaseJob
         // 消息
         $this->msg = new Collection($msg);
 
-        LogHelper::dir('queue')
+        Log::dir('queue')
+            ->name($this->getClassBaseName('.send'))
+            ->withDateToName()
             ->debug(
-                $this->getClassBaseName('.send'),
                 $this->msg->toJson(JSON_UNESCAPED_UNICODE)
             );
     }

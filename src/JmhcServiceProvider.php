@@ -11,7 +11,7 @@ use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
-use Jmhc\Support\Utils\LogHelper;
+use Jmhc\Log\Log;
 
 class JmhcServiceProvider extends ServiceProvider
 {
@@ -19,29 +19,34 @@ class JmhcServiceProvider extends ServiceProvider
     {
         // 任务失败事件
         Queue::failing(function (JobFailed $event) {
-            LogHelper::dir('queue')->save(
-                $this->getJobName($event->job) . 'failed',
-                $event->exception->getMessage() . PHP_EOL . $event->exception->getTraceAsString()
-            );
+            Log::dir('queue')
+                ->name($this->getLogName($event->job, 'failed'))
+                ->withDateToName()
+                ->throwable(
+                    $event->exception
+                );
         });
 
         // 任务开始事件
         Queue::before(function (JobProcessing $event) {
-            LogHelper::dir('queue')->debug(
-                $this->getJobName($event->job) . 'handle',
-                $event->job->getRawBody()
-            );
+            Log::dir('queue')
+                ->name($this->getLogName($event->job, 'handle'))
+                ->withDateToName()
+                ->debug(
+                    $event->job->getRawBody()
+                );
         });
     }
 
     /**
      * 获取任务名称
      * @param Job $job
+     * @param string $name
      * @return string
      */
-    protected function getJobName(Job $job)
+    protected function getLogName(Job $job, string $name)
     {
         $payload = $job->payload();
-        return ! empty($payload['displayName']) ? class_basename($payload['displayName']). '.' : '';
+        return (! empty($payload['displayName']) ? class_basename($payload['displayName']) . '.' : '') . $name;
     }
 }
