@@ -28,6 +28,7 @@ abstract class BaseRabbitmq extends BaseJob
         Log::dir('queue')
             ->name($this->getClassBaseName('.send'))
             ->withDateToName()
+            ->withMessageLineBreak()
             ->debug(
                 $this->msg->toJson(JSON_UNESCAPED_UNICODE)
             );

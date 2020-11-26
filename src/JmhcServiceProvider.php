@@ -22,6 +22,7 @@ class JmhcServiceProvider extends ServiceProvider
             Log::dir('queue')
                 ->name($this->getLogName($event->job, 'failed'))
                 ->withDateToName()
+                ->withMessageLineBreak()
                 ->throwable(
                     $event->exception
                 );
@@ -32,6 +33,7 @@ class JmhcServiceProvider extends ServiceProvider
             Log::dir('queue')
                 ->name($this->getLogName($event->job, 'handle'))
                 ->withDateToName()
+                ->withMessageLineBreak()
                 ->debug(
                     $event->job->getRawBody()
                 );
